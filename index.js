@@ -73,7 +73,7 @@ const getCleanCommandFromProjectDirectory = (gradleProjectDirectory) => {
 const executeIndividualProjectCleanCommand = async (projectCleanCommand) => {
     const {stdout, stderr} = await exec(
         projectCleanCommand.command,
-        { cwd: projectCleanCommand.workingDirectory }
+        {cwd: projectCleanCommand.workingDirectory}
     );
     console.log(stdout);
     console.error(stderr);
@@ -107,10 +107,14 @@ const main = async () => {
     }
 };
 
-main()
-    .catch(error => {
-        console.error(error);
-        process.exit(1);
-    })
-    // https://stackoverflow.com/a/46916601/1478566
-    .finally(clearInterval.bind(null, setInterval(a => a, 1E9)));
+const globalGradleClean = () => {
+    main()
+        .catch(error => {
+            console.error(error);
+            process.exit(1);
+        })
+        // https://stackoverflow.com/a/46916601/1478566
+        .finally(clearInterval.bind(null, setInterval(a => a, 1E9)));
+};
+
+module.exports = globalGradleClean;
