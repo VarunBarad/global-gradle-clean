@@ -1,16 +1,19 @@
 {
   "name": "global-gradle-clean",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "This is used to clean all gradle projects residing under a folder.",
   "main": "index.js",
   "bin": {
     "global-gradle-clean": "./bin.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VarunBarad/global-gradle-clean"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Varun Barad <varun@varunbarad.com> (https://varunbarad.com)",
   "license": "ISC"
 }
