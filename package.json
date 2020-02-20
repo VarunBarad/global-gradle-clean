@@ -1,6 +1,6 @@
 {
   "name": "global-gradle-clean",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This is used to clean all gradle projects residing under a folder.",
   "main": "index.js",
   "bin": {
