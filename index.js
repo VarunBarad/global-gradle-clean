@@ -9,7 +9,7 @@ const isRunningOnWindows = (os.platform() === 'win32');
 const gradleFileNames = {
     wrapperName: {
         patterns: {
-            windows: RegExp('gradlew.bat$', 'i'),
+            windows: RegExp('gradlew\\.bat$', 'i'),
             nix: RegExp('gradlew$')
         },
         names: {
