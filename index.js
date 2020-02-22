@@ -1,5 +1,5 @@
 const os = require('os');
-const fileSystem = require('fs');
+const fs = require('fs');
 const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
@@ -20,9 +20,9 @@ const gradleFileNames = {
 };
 
 const getFilesAndSubDirectories = (directory) => {
-    const allFiles = fileSystem.readdirSync(directory);
-    const directories = allFiles.filter(f => fileSystem.statSync(path.join(directory, f)).isDirectory());
-    const files = allFiles.filter(f => !fileSystem.statSync(path.join(directory, f)).isDirectory());
+    const allFiles = fs.readdirSync(directory);
+    const directories = allFiles.filter(f => fs.statSync(path.join(directory, f)).isDirectory());
+    const files = allFiles.filter(f => !fs.statSync(path.join(directory, f)).isDirectory());
 
     return {
         fileNames: files,
@@ -95,7 +95,7 @@ const main = async () => {
         baseDirectory = process.cwd();
     }
 
-    if (fileSystem.existsSync(baseDirectory)) {
+    if (fs.existsSync(baseDirectory)) {
         const gradleProjectCleanCommands = traverseDirectory(baseDirectory)
             .map(projectDirectory => getCleanCommandFromProjectDirectory(projectDirectory));
 
