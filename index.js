@@ -126,8 +126,6 @@ const globalGradleClean = () => {
             console.error(error);
             process.exit(1);
         })
-        // https://stackoverflow.com/a/46916601/1478566
-        .finally(clearInterval.bind(null, setInterval(a => a, 1E9)));
 };
 
 module.exports = globalGradleClean;
