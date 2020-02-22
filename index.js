@@ -21,8 +21,21 @@ const gradleFileNames = {
 
 const getFilesAndSubDirectories = (directory) => {
     const allFiles = fs.readdirSync(directory);
-    const directories = allFiles.filter(f => fs.statSync(path.join(directory, f)).isDirectory());
-    const files = allFiles.filter(f => !fs.statSync(path.join(directory, f)).isDirectory());
+
+    const directories = allFiles.filter(f => {
+        try {
+            return fs.statSync(path.join(directory, f)).isDirectory();
+        } catch (e) {
+            return false;
+        }
+    });
+    const files = allFiles.filter(f => {
+        try {
+            return !fs.statSync(path.join(directory, f)).isDirectory();
+        } catch (e) {
+            return false;
+        }
+    });
 
     return {
         fileNames: files,
