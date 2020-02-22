@@ -4,5 +4,4 @@ This is a node-js script to clean all gradle projects (those which use gradle-wr
 
 ## Next steps
 
-- Make this an executable package.
-- Publish on npm
+- Add file-ignore patterns
