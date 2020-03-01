@@ -1,8 +1,9 @@
+const customUtils = require('./utils');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const nodeUtils = require('util');
+const exec = nodeUtils.promisify(require('child_process').exec);
 
 const isRunningOnWindows = (os.platform() === 'win32');
 
@@ -20,22 +21,16 @@ const gradleFileNames = {
 };
 
 const getFilesAndSubDirectories = (directory) => {
-    const allFiles = fs.readdirSync(directory);
+    const partitionedFiles = customUtils.partition(fs.readdirSync(directory), file => {
+        try {
+            return fs.statSync(path.join(directory, file)).isDirectory();
+        } catch (e) {
+            return false;
+        }
+    });
 
-    const directories = allFiles.filter(f => {
-        try {
-            return fs.statSync(path.join(directory, f)).isDirectory();
-        } catch (e) {
-            return false;
-        }
-    });
-    const files = allFiles.filter(f => {
-        try {
-            return !fs.statSync(path.join(directory, f)).isDirectory();
-        } catch (e) {
-            return false;
-        }
-    });
+    const directories = partitionedFiles.filterPassed;
+    const files = partitionedFiles.filterFailed;
 
     return {
         fileNames: files,
