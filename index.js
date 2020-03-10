@@ -20,6 +20,12 @@ const gradleFileNames = {
     }
 };
 
+const ignorePatterns = [
+    RegExp('\\.git$', 'i'),
+    RegExp('\\.idea$', 'i'),
+    RegExp('node_modules$', 'i')
+];
+
 const getFilesAndSubDirectories = (directory) => {
     const partitionedFiles = customUtils.partition(fs.readdirSync(directory), file => {
         try {
@@ -48,9 +54,21 @@ const isThisAGradleProjectDirectory = (directory) => {
     }
 };
 
+const shouldIgnoreDirectory = (directory) => {
+    for (const pattern of ignorePatterns) {
+        if (pattern.test(directory)) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 const traverseDirectory = (directory) => {
     if (isThisAGradleProjectDirectory(directory)) {
         return [directory];
+    } else if (shouldIgnoreDirectory(directory)) {
+        return [];
     } else {
         const gradleProjectDirectories = [];
 
