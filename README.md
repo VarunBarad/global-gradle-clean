@@ -41,4 +41,4 @@ __Note:__ Surround `<base-dir>` with double-quotes to avoid troubles with paths 
 
 ## Next steps
 
-- Add file-ignore patterns
+- 
